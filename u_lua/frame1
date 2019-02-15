@@ -1,0 +1,22 @@
+
+num50 = 5;
+createALLnum = 90;
+createNOWnum = 1;
+
+function random2(num1,num2)
+	math.randomseed(os.time());
+	return math.random(num1,num2);
+end
+function frame(width,height,drawCallY)
+	if(drawCallY>50 and num50>0 ) then
+		if(createNOWnum<=0) then
+		local d= random2(0,width);
+		testId = u_createEnemy(0,10,d,-u_getImgHeight(0),1.0,0,3);
+		u_setEnemyMoveTypeX(testId,2);
+		num50=num50-1;
+		createNOWnum = createALLnum;
+		else 
+			createNOWnum=createNOWnum-1;
+		end
+	end
+end
