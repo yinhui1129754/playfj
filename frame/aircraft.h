@@ -17,6 +17,7 @@ public:
 	int deathFrame;
 	//生命值
 	int PH;
+	int maxPH;
 	//方向类型 0 ↓ 1↑ 2← 3→
 	int angle_type; //0,1,2,3 四个方向 同时控制子弹的发射方向
 };

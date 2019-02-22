@@ -37,6 +37,7 @@ public:
 	float  alpha = 1;
 	float getTxtWidth(DemoApp * app);
 	float getTxtHeight(DemoApp * app);
+
 	//drawSprite
 	DemoApp * app = NULL;
 	void (*drawCall)(sprite *sp,DemoApp *app);

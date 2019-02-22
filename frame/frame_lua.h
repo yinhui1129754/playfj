@@ -21,4 +21,14 @@ extern class power;
 	 static int getImgHeight(lua_State * L);
 	 static int setEnemyMoveTypeX(lua_State * L);
 	 static int setEnemyMoveTypeY(lua_State * L);
+	 static int setEnemyPowerNum(lua_State * L);
+	 static int setEnemyAttr(lua_State * L);
+	 static int addEnemyAutoSend(lua_State * L);
+	 static int setEnemyName(lua_State *L);
+	 static int nextGs(lua_State *L);
+	 //·Çenemy
+	 static int createProp(lua_State * L);
+
+	 //frame2
+	 static int addGs(lua_State * L);
 }

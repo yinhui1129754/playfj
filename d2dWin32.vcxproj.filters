@@ -198,6 +198,15 @@
     <ClInclude Include="frame\power.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="frame\prop.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="frame\MiniDump.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="frame\textView.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="frame\files.cpp">
@@ -372,6 +381,15 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="frame\power.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="frame\prop.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="frame\MiniDump.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="frame\textView.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

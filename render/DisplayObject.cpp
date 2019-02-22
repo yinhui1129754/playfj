@@ -85,12 +85,16 @@ void DisplayObject::setY(int y) {
 
 }
 int DisplayObject::removeChild(sprite * child) {
-	vector<sprite *>::iterator it= find((this->children).begin(), (this->children).end(), child);
-	(this->children).erase(it);
+	vector<sprite *>::iterator it= find(this->children.begin(), this->children.end(), child);
+	if (it == this->children.end()) {
+		
+		return this->children.size();
+	}
+	this->children.erase(it);
 	if (child->parent!=NULL) {
 		child->parent = NULL;
 	}
-	return (this->children).size();
+	return this->children.size();
 }
 float DisplayObject::getWidth() {
 	return this->width*this->zoom;
@@ -105,7 +109,11 @@ void DisplayObject::render(DemoApp * app) {
 	if (!this->visible) {
 		return;
 		}
-		for (unsigned int i = 0;i < this->children.size();i++) {
+	unsigned int i = 0;
+		for (i = 0;i < this->children.size();i++) {
 			this->children[i]->render(app);
+		}
+		for (i = 0; i < this->drawCallList.size(); i++) {
+			drawCallList[i](app);
 		}
 };

@@ -42,7 +42,7 @@ public:
 	sprite * parent = NULL;
 	oMap<string,int> use_int;
 	oMap<string, string>use_str;
-
+	vector<void(*)(DemoApp *)> drawCallList;
 
 };
 

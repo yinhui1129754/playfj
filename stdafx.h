@@ -26,6 +26,7 @@
 #define M_PI       3.14159265358979323846   // pi
 #include <cmath>
 #include <time.h>
+#include "frame/MiniDump.h"
 // TODO:  在此处引用程序需要的其他头文件
 #include <d2d1.h>
 #include <d2d1helper.h>

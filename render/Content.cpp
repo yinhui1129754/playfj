@@ -288,10 +288,11 @@ void Content::getTextInfo(LPWSTR  txt, D2D1_SIZE_F& size) {
 	size = D2D1::SizeF(ceil(textMetrics.widthIncludingTrailingWhitespace), ceil(textMetrics.height));
 	SafeRelease(&pTextLayout);
 }
-void Content::getTextInfo(string  txt, D2D1_SIZE_F& size) {
+void Content::getTextInfo(string  txt, D2D1_SIZE_F & size) {
 	
 	LPWSTR a = g_chartowchar2(txt.c_str());
 	this->getTextInfo(txt, size);
+	free(a);
 };
 ID2D1Bitmap * Content::getSoucre(WCHAR * url) {
 	vector<WCHAR *>::iterator it;
@@ -403,7 +404,7 @@ void Content::drawLine(int x, int y, int x2, int y2) {
 	}
 }
 void Content::drawText(LPWSTR  txt, int x, int y) {
-	D2D1_RECT_F layoutRect = D2D1::RectF(x, y, x+100, y+100);
+	D2D1_RECT_F layoutRect = D2D1::RectF(x, y, x+150, y+150);
 	this->m_render->DrawText(txt,wcslen(txt),this->m_forMat,layoutRect,this->pen);
 }
 void Content::drawText(LPWSTR  txt, int x, int y, IDWriteTextFormat * u_forMat) {
@@ -414,15 +415,18 @@ void Content::drawText(string  txt, int x, int y) {
 	D2D1_RECT_F layoutRect = D2D1::RectF(x, y, x + 100, y + 100);
 	LPWSTR a = g_chartowchar2(txt.c_str());
 	this->m_render->DrawText(a, wcslen(a), this->m_forMat, layoutRect, this->pen);
+	free(a);
 }
 void Content::drawText(LPWSTR  txt, int x, int y,int w,int h) {
 	D2D1_RECT_F layoutRect = D2D1::RectF(x, y, x + w, y + h);
 	this->m_render->DrawText(txt, wcslen(txt), this->m_forMat, layoutRect, this->pen);
 }
+
 void Content::drawText(string  txt, int x, int y, int w, int h) {
 	D2D1_RECT_F layoutRect = D2D1::RectF(x, y, x + w, y + h);
 	LPWSTR a = g_chartowchar2(txt.c_str());
 	this->m_render->DrawText(a, wcslen(a), this->m_forMat, layoutRect, this->pen);
+	free(a);
 }
 Content::~Content()
 {

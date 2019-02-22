@@ -1,8 +1,9 @@
-// d2dWin32.cpp : ∂®“Â”¶”√≥Ã–Úµƒ»Îø⁄µ„°£
+Ôªø// d2dWin32.cpp : ÂÆö‰πâÂ∫îÁî®Á®ãÂ∫èÁöÑÂÖ•Âè£ÁÇπ„ÄÇ
 //
 
 #include "../stdafx.h"
 #include "d2dWin32.h"
+#include "DbgHelp.h"
 //#include "frame0.h"
 void frame1(DemoApp*);
 DemoApp __app;
@@ -40,7 +41,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
-
+	MiniDump::EnableAutoDump(true);
 	// Use HeapSetInformation to specify that the process should
 	// terminate if the heap manager detects an error in any heap used
 	// by the process.
@@ -54,7 +55,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 			__app.addFun(frame1);
 		
-			hhk = SetWindowsHookExA(WH_MOUSE_LL, (HOOKPROC)MouseProc, GetModuleHandle(0), 0);
+		//	hhk = SetWindowsHookExA(WH_MOUSE_LL, (HOOKPROC)MouseProc, GetModuleHandle(0), 0);
 			if (SUCCEEDED(__app.Initialize()))
 			{
 				__app.RunMessageLoop();
@@ -62,6 +63,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		}
 		CoUninitialize();
 	}
+	
 	if (hhk != NULL) {
 		UnhookWindowsHookEx(hhk);
 	}

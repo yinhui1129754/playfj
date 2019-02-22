@@ -38,8 +38,9 @@ void createBefore::createWindow(DemoApp * app) {
 	l_app->content->resize(l_app->width, l_app->height);
 
 	frame_lua::init();
-
-
+	RECT rc;
+	GetWindowRect(app->getHwnd(), &rc);
+	InvalidateRect(app->getHwnd(),&rc,TRUE);
 };
 void messageMapping::onKeyDown(int code) {
 	string a = g_concat("frame", l_app->nowScene);

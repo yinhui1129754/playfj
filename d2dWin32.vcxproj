@@ -159,7 +159,10 @@
     <ClInclude Include="frame\frame2.h" />
     <ClInclude Include="frame\frame3.h" />
     <ClInclude Include="frame\frame_lua.h" />
+    <ClInclude Include="frame\MiniDump.h" />
     <ClInclude Include="frame\power.h" />
+    <ClInclude Include="frame\prop.h" />
+    <ClInclude Include="frame\textView.h" />
     <ClInclude Include="frame\user.h" />
     <ClInclude Include="instance\collision.h" />
     <ClInclude Include="instance\colVec.h" />
@@ -213,7 +216,10 @@
     <ClCompile Include="frame\frame2.cpp" />
     <ClCompile Include="frame\frame3.cpp" />
     <ClCompile Include="frame\frame_lua.cpp" />
+    <ClCompile Include="frame\MiniDump.cpp" />
     <ClCompile Include="frame\power.cpp" />
+    <ClCompile Include="frame\prop.cpp" />
+    <ClCompile Include="frame\textView.cpp" />
     <ClCompile Include="frame\user.cpp" />
     <ClCompile Include="instance\collision.cpp" />
     <ClCompile Include="instance\colVec.cpp" />

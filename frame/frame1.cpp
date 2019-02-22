@@ -75,19 +75,19 @@ void frame1::visible(){
 
 
 		sprite * imgFz = new sprite(frame1::app, L"img/Interface/aa.png");
-		imgFz->zoom = 0.4;
-		imgFz->setX(frame1::app->width-imgFz->getWidth());
-		imgFz->setY(frame1::app->height - imgFz->getHeight());
+
 
 
 		frame1::maxBox->addChild(bg);
+
+		frame1::maxBox->addChild(imgFz);
 		frame1::maxBox->addChild(back);
 		frame1::maxBox->addChild(text);
 
 		frame1::maxBox->addChild(text2);
 		frame1::maxBox->addChild(text3);
 		frame1::maxBox->addChild(text4);
-		frame1::maxBox->addChild(imgFz);
+	
 	}
 	
 	frame1::firstVisible = TRUE;

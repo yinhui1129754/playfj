@@ -26,6 +26,7 @@ power::power(sprite * spr):aircraft(spr,10) {
 	this->end = new POINT;
 	this->t = 0;
 	this->moveAng = 361.0f;
+	this->powerType = 0; //×Óµ¯ÀàÐÍ
 };
 BOOL power::frame() {
 	if (this->angle_type == 0) {
@@ -49,6 +50,16 @@ BOOL power::frame() {
 		else if (moveType == 2) {
 			this->view->setY(this->view->g_y - this->speed);
 		}
+		if (this->powerType != 0&&this->isDeath!=0) {
+			if (this->deathNum >= 0) {
+				this->deathNum--;
+			}
+			else {
+				frame3::removePowerEx(this);
+				return TRUE;
+			}
+		}
+
 	}
 	if (this->view->g_x > frame3::app->width+ this->view->getWidth()*2 || 
 		this->view->g_x < -this->view->getWidth() * 2||
@@ -65,18 +76,29 @@ void power::hurtUser(user * u) {
 };
 void power::hurtEnemy(enemy *e) {
 	e->PH -= this->hurt;
-	if (e->PH <= 0) {
-		e->PH = 0;
-		e->isDeath = 1;
-		e->view->img = e->deathView->img;
-		e->view->width = e->deathWidth;
-		e->view->height = e->deathHeight;
-		e->view->zoom = 1;
-		e->view->speedTime = 50;
-		e->view->spriteType = "animateSprite";
-		for (int i = 0; i < 6; i++) {
-			u_rect a = { 0,e->deathHeight*i,e->deathWidth,e->deathHeight };
-			e->view->frameArr.push_back(a);
-		}
+	if (e->isShowPH == 1) {
+		frame3::userList[0]->hurtEnemy = (long long)e;
 	}
+	if (e->PH <= 0) {
+		e->deathCall();
+	}
+};
+void power::deathCall() {
+	if (this->powerType == 1&&this->deathView!=NULL) {
+		int local_w = this->view->width;
+		int local_h = this->view->height;
+		this->PH = 0;
+		this->isDeath = 1;
+		this->view->img = this->deathView->img;
+		this->view->width = this->deathView->getWidth();
+		this->view->height = this->deathView->getHeight();
+		this->view->zoom = 1;
+		this->view->setX(this->view->g_x - (this->view->width - local_w) / 2);
+		this->view->setY(this->view->g_y - (this->view->height - local_h) / 2);
+		this->moveType = -1;
+		sprite * sp = this->view->children[0];
+		this->view->children.pop_back();
+		delete sp;
+	}
+
 };

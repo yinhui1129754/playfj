@@ -6,7 +6,7 @@ LPWSTR utils::user_stringToLPWSTR(std::string orig) {
 	int lng = orig.length();
 	LPWSTR d = (LPWSTR)malloc(sizeof(PWSTR)*lng);
 	memset(d, 0, sizeof(PWSTR)*lng);
-	MultiByteToWideChar(CP_ACP, 0, orig.c_str(), lng, d, lng * sizeof(LPCWSTR));
+	MultiByteToWideChar(CP_ACP, 0, orig.c_str(), lng, d, lng * sizeof(PWSTR));
 	return d;
 }
 string utils::user_LPWSTRTostring(LPWSTR lpw) {

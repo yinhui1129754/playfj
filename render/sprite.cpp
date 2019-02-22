@@ -153,10 +153,7 @@ void sprite::render(DemoApp * app) {
 	}
 	app->content->restore();
 	//递归绘制所有子元素
-	unsigned int len = this->children.size();
-	for (unsigned int i = 0;i < len;i++) {
-		if (this->children[i]->children.size() > 0) {
-			this->children[i]->render(app);
-		}
+	for (unsigned int i = 0;i < this->children.size();i++) {
+		this->children[i]->render(app);
 	}
 }

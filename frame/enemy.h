@@ -21,13 +21,39 @@ public:
 	int userTypeStatus = 0; //初始创建的动画
 	int id;
 
+	//敌机类型 0向下移动 1波浪移动过类型
+	int enemyType;
+	int addNumFrame;
+	int subNumFrame;
+	int bufNumFrame;
+
+	//是否显示生命值
+	int isShowPH;
 
 
 	//子弹
-	int powerNum;
+	int powerNum; //子弹数量
 	void  sendPower(int id);
-	int powerType;
-	int powerSendNum;
-	int powerSendAllNum;
+	void  sendPower(int id,POINT p);
+	void  sendPower();
+	void  sendPower(POINT p);
+	int powerId; //子弹发射的图片id
+	int powerIdAuto; //自动发射子弹的图片id
+	int powerType; //发送子弹类型
+	int powerSendNum; //发送子弹当前间隔
+	int powerSendAllNum; //发送子弹总间隔
+	int hurt; //伤害
+	vector<POINT> sendPoints; //自动发射子弹点
+	void addSendPoint(POINT p); //新增发射子弹点
+	int powerTypeAuto; //自动发射子弹类型
+	int powerSendNumAuto; //自动发送子弹当前间隔
+	int powerSendAllNumAuto; //自动发送子弹总间隔
+
+	//设置name
+	LPWSTR name;
+	int stringWidth;
+	void setName(LPWSTR);
+	//死亡回调
+	void deathCall();
 };
 

@@ -106,7 +106,7 @@ HRESULT DemoApp::Initialize()
 		m_hwnd = CreateWindow(
 			L"MXSJ",
 			L"playfj",
-			WS_OVERLAPPEDWINDOW^WS_MAXIMIZEBOX^WS_THICKFRAME,
+			WS_OVERLAPPEDWINDOW&(~WS_MAXIMIZEBOX)&(~WS_SIZEBOX)&(~WS_CAPTION),
 			CW_USEDEFAULT,
 			CW_USEDEFAULT,
 			450,
@@ -117,7 +117,9 @@ HRESULT DemoApp::Initialize()
 			this
 		);
 		hr = m_hwnd ? S_OK : E_FAIL;
-		SetWindowLong(m_hwnd, GWL_STYLE, NULL);
+		LONG styleLong=GetWindowLong(m_hwnd, GWL_STYLE);
+		SetWindowLong(m_hwnd, GWL_STYLE, styleLong&(~WS_MAXIMIZEBOX)&(~WS_SIZEBOX)&(~WS_CAPTION));
+
 		content = new Content(m_hwnd);
 		content->strokeStyle(0xff00ff, 1);
 		content->lineWidth = 2;
@@ -131,9 +133,13 @@ HRESULT DemoApp::Initialize()
 			ShowWindow(m_hwnd, SW_SHOWNORMAL);
 			UpdateWindow(m_hwnd);
 		}
-
+		
+	
 	}
 	createBefore::createWindow(this);
+	RECT rc;
+	GetWindowRect(GetDesktopWindow(), &rc);
+	MoveWindow(m_hwnd,(rc.right-rc.left)/2- this->width/2, ( rc.bottom- rc.top) / 2- this->height/2, this->width,this->height, TRUE);
 	return hr;
 }
 /*void DemoApp::addScene(action * scane) {
@@ -221,6 +227,7 @@ LRESULT CALLBACK DemoApp::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM
 				result = 0;
 				wasHandled = true;
 				break;
+		
 			case WM_KEYDOWN:
 				messageMapping::onKeyDown(wParam);
 				result = 0;

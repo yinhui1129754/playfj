@@ -24,5 +24,8 @@ public:
 	BOOL  getCenter();
 	int isUser;
 	float moveAng;
+
+	int powerType;
+	void deathCall();
 };
 

@@ -1,0 +1,97 @@
+controller = {};
+--创建普通飞机的时间间隔
+controller.createNOWnum= 0;
+controller.createALLnum= 90;
+
+controller.pt3Num = 1;
+
+controller.width = 0;
+controller.height = 0;
+controller.drawCallY = 0;
+BOSSid= 0;
+
+function createPT(id,PH)
+	local d= random2(0,controller.width);
+	--imgId PH x y zoom moveType speed enemyType powerType
+	local testId = u_createEnemy(id,PH,d,-u_getImgHeight(id),1.0,0,3,0,0);
+	u_setEnemyMoveTypeX(testId,2);
+	u_setEnemyPowerNum(testId,1);
+		u_setEnemyAttr(testId,6,1);
+		
+	u_setEnemyName(testId,"小飞机");
+	return testId;
+end;
+--创建发射有一定导向的飞机
+function createPT2(id,PH)
+	local d= random2(0,controller.width);
+	--imgId PH x y zoom moveType speed enemyType powerType
+	local testId = u_createEnemy(id,PH,d,-u_getImgHeight(id),1.0,0,3,0,1);
+	u_setEnemyMoveTypeX(testId,2);
+	u_setEnemyPowerNum(testId,1);
+	return testId;
+end
+--创建左移动波浪移动飞机
+function createPT3(id,PH)
+	
+	--imgId PH x y zoom moveType speed enemyType powerType 
+	local testId = u_createEnemy(id,PH,controller.width,u_getImgHeight(id),1.0,0,3,1,1);
+	u_setEnemyMoveTypeX(testId,1);
+	u_setEnemyAttr(testId,0,40);
+	u_setEnemyAttr(testId,1,25);
+	u_setEnemyPowerNum(testId,2);
+	return testId;
+end
+--创建右移动波浪移动飞机
+function createPT4(id,PH)
+	--imgId PH x y zoom moveType speed enemyType powerType 
+	local testId = u_createEnemy(id,PH,-u_getImgWidth(id),u_getImgHeight(id),1.0,0,3,1,1);
+	u_setEnemyMoveTypeX(testId,0);
+	u_setEnemyAttr(testId,0,40);
+	u_setEnemyAttr(testId,1,25);
+	u_setEnemyPowerNum(testId,2);
+	return testId;
+end
+--创建左右移动波浪移动飞机
+function createPT5(id,PH,name)
+	--imgId PH x y zoom moveType speed enemyType powerType 
+	local testId = u_createEnemy(id,PH,-u_getImgWidth(id),u_getImgHeight(id),1.0,0,3,2,1);
+	u_addEnemyAutoSend(testId,0,u_getImgHeight(id));
+	u_addEnemyAutoSend(testId,u_getImgWidth(id),u_getImgHeight(id));
+
+	u_setEnemyAttr(testId,0,10);
+	u_setEnemyAttr(testId,1,10);
+	u_setEnemyAttr(testId,6,1);
+	u_setEnemyPowerNum(testId,2);
+	u_setEnemyName(testId,name);
+	return testId;
+end
+
+function random2(num1,num2)
+	math.randomseed(os.time());
+	return math.random(num1,num2);
+end
+function frame(width,height,drawCallY)
+	controller.width = width;
+	controller.height = height;
+	controller.drawCallY = drawCallY;
+	if(drawCallY>50 ) then
+		if(controller.createNOWnum<=0) then
+			testId = createPT(0,10);
+			controller.createNOWnum = controller.createALLnum;
+		else 
+			controller.createNOWnum=controller.createNOWnum-1;
+		end
+		if(controller.pt3Num>0) then
+			BOSSid=createPT5(5,100,"BOSS");
+			controller.pt3Num = controller.pt3Num-1;
+		end
+	end
+end
+function deathCall(enId)
+	if(random2(0,10)>5) then
+		nu_createProp(enId,0,0);
+	end
+	if(enId == BOSSid) then
+		controller.pt3Num = controller.pt3Num+1;
+	end
+end
