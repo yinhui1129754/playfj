@@ -530,7 +530,6 @@ void frame3::visible(){
 	ss << (frame2::gs + 1);
 	url = ss.str();
 	int bRet = luaL_loadfile(frame3::ulua_l, url.c_str());
-
 	if (bRet) {
 		utils::AlertOut(L"load lua file faile", 0);
 	}

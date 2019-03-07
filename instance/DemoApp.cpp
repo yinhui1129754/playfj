@@ -118,7 +118,7 @@ HRESULT DemoApp::Initialize()
 		);
 		hr = m_hwnd ? S_OK : E_FAIL;
 		LONG styleLong=GetWindowLong(m_hwnd, GWL_STYLE);
-		SetWindowLong(m_hwnd, GWL_STYLE, styleLong&(~WS_MAXIMIZEBOX)&(~WS_SIZEBOX)&(~WS_CAPTION));
+		SetWindowLong(m_hwnd, GWL_STYLE, styleLong&(~WS_CAPTION));
 
 		content = new Content(m_hwnd);
 		content->strokeStyle(0xff00ff, 1);
